@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr" class="motion-ready">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CK Construction — Construction & génie civil</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  </head>
+  <body>
+    <!-- Intro Experience / Preloader -->
+    <div id="intro-experience" class="site-loader intro-experience">
+      
+      <div class="intro-visuals" id="intro-visuals">
+        
+        <div class="intro-group" id="group-c">
+          <svg class="intro-letter-svg" viewBox="0 0 100 100">
+            <path class="draw-line draw-c" d="M 80 20 A 40 40 0 1 0 80 80" fill="none" stroke="#fff" stroke-width="2" />
+          </svg>
+          <div class="intro-text-small">Créativité</div>
+        </div>
+
+        <div class="intro-group" id="group-k">
+          <svg class="intro-letter-svg" viewBox="0 0 100 100">
+            <path class="draw-line draw-k" d="M 20 10 L 20 90 M 80 10 L 20 50 L 80 90" fill="none" stroke="#fff" stroke-width="2" />
+          </svg>
+          <div class="intro-text-small">Know-how</div>
+        </div>
+        
+        <div class="intro-final" id="group-final">
+          <div class="intro-text-big">CK</div>
+          <div class="intro-text-medium" id="text-construction">CONSTRUCTION</div>
+          <div class="intro-signatures">
+            <div id="text-signature1" class="intro-signature">La référence de la construction moderne.</div>
+            <div id="text-signature2" class="intro-signature">Imaginez. Nous construisons.</div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+
+    <!-- Cursor Glow -->
+    <div class="motion-cursor-glow" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <header class="navbar" id="navbar">
+      <div class="navbar-container">
+        <a href="#accueil" class="brand">
+          <svg class="brand-logo" viewBox="0 0 56 56" fill="none" stroke="var(--brand-accent)" stroke-width="2">
+            <path d="M5 50V22l9-6v34M20 50V10l10-7v47M36 50V24l9 6v20M3 50h50"></path>
+            <path d="M24 16h3M24 24h3M24 32h3M9 28h3M9 36h3M40 34h3M40 42h3"></path>
+          </svg>
+          <div class="brand-text">
+            <strong>CK Construction</strong>
+            <span>Construction & Génie civil</span>
+          </div>
+        </a>
+        <nav class="nav-links">
+          <a href="#accueil" class="active">Accueil</a>
+          <a href="#expertises">Expertises</a>
+          <a href="#realisations">Réalisations</a>
+          <a href="#methode">Méthode</a>
+          <a href="#temoignages">Avis</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="#contact" class="btn-primary">Demander un devis</a>
+          <button class="burger-menu" id="burgerMenu" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu__panel">
+        <nav class="mobile-menu__nav">
+          <a href="#accueil">Accueil</a>
+          <a href="#expertises">Expertises</a>
+          <a href="#realisations">Réalisations</a>
+          <a href="#methode">Méthode</a>
+          <a href="#temoignages">Avis</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="accueil" class="hero landing-section is-visible">
+        <div class="hero-media parallax-bg">
+          <img src="/assets/hero.jpg" alt="Hero background" />
+          <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content container">
+          <div class="hero-text" data-reveal>
+            <span class="eyebrow">Construction & génie civil</span>
+            <h1>Nous bâtissons des ouvrages <em>qui durent.</em></h1>
+            <p class="lede">Études, construction et suivi de chantier avec un interlocuteur unique, des délais clairs et une exécution exigeante.</p>
+            <div class="hero-actions">
+              <a href="#realisations" class="btn-primary">Voir nos réalisations</a>
+            </div>
+          </div>
+          <div class="hero-stats card-glass" data-reveal="delay-2">
+            <div class="stat-line">
+              <strong>12+ ans</strong>
+              <span>D'expertise</span>
+            </div>
+            <div class="stat-line">
+              <strong>250+</strong>
+              <span>Projets réalisés</span>
+            </div>
+            <div class="stat-line">
+              <strong>98%</strong>
+              <span>Clients satisfaits</span>
+            </div>
+            <div class="stat-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V6.5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1V20M14 11h4a1 1 0 0 1 1 1v8M4 20h16M8 9h1.5M8 13h1.5M8 17h1.5"></path></svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Expertises -->
+      <section id="expertises" class="expertises landing-section section-padding bg-light">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <span class="eyebrow-text">Nos expertises</span>
+            <h2>Trois métiers. <span>Une exécution maîtrisée.</span></h2>
+            <div class="separator"></div>
+            <p>De la structure à la réhabilitation, nous concentrons nos équipes sur les ouvrages que nous maîtrisons.</p>
+          </div>
+          <div class="services-grid">
+            <div class="service-card motion-card" data-reveal>
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V5h14v16M9 9h6M9 13h6M9 17h6"/></svg>
+              </div>
+              <h3>Construction de bâtiments</h3>
+              <div class="card-sep"></div>
+              <p>Conception et réalisation de bâtiments tertiaires, industriels et résidentiels clés en main.</p>
+            </div>
+            <div class="service-card motion-card" data-reveal="delay-1">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <h3>Quincaillerie & Outillage</h3>
+              <div class="card-sep"></div>
+              <p>Fourniture de matériaux et outils de haute qualité pour équiper vos chantiers.</p>
+            </div>
+            <div class="service-card motion-card" data-reveal="delay-2">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3>Réhabilitation</h3>
+              <div class="card-sep"></div>
+              <p>Rénovation et mise à niveau de structures existantes dans le respect des normes.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Réalisations -->
+      <section id="realisations" class="realisations landing-section section-padding">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <span class="eyebrow-text">Réalisations</span>
+            <h2>Le travail parle de lui-même.</h2>
+            <p>Une sélection de nos projets en cours de suivi sur le terrain.</p>
+          </div>
+          <div class="gallery-grid">
+            <div class="gallery-item motion-card" data-reveal>
+              <video src="/assets/WhatsApp Video 2026-09-23 at 2.15.20 PM.mp4" class="motion-image" autoplay muted loop playsinline></video>
+              <div class="gallery-overlay">
+                <h4>Projet Résidentiel</h4>
+                <span>Gros œuvre en cours</span>
+              </div>
+            </div>
+            <div class="gallery-item motion-card before-after-container" data-reveal="delay-1" id="before-after-slider">
+              <img src="/assets/WhatsApp Image 2026-09-23 at 2.18.02 PM.jpeg" alt="Après" class="after-img" />
+              <div class="before-wrapper">
+                <img src="/assets/construction.jpg" alt="Avant" class="before-img" />
+              </div>
+              <div class="slider-handle">
+                <div class="slider-handle-line"></div>
+                <div class="slider-handle-button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                </div>
+              </div>
+              <div class="gallery-overlay">
+                <h4>Avant / Après</h4>
+                <span>Évolution du chantier</span>
+              </div>
+            </div>
+            <div class="gallery-item motion-card" data-reveal="delay-2">
+              <video src="/assets/WhatsApp Video 2026-09-23 at 2.17.53 PM.mp4" class="motion-image" autoplay muted loop playsinline></video>
+              <div class="gallery-overlay">
+                <h4>Suivi de Chantier</h4>
+                <span>Visite guidée sur site</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Méthode -->
+      <section id="methode" class="methode landing-section section-padding bg-light">
+        <div class="container">
+          <div class="section-header text-center" data-reveal>
+            <span class="eyebrow-text">Notre méthode</span>
+            <h2>Du devis à la livraison.</h2>
+            <p>Un parcours lisible, des validations à chaque étape et un suivi continu.</p>
+          </div>
+          <div class="process-grid">
+            <div class="process-step motion-card" data-reveal>
+              <div class="step-number">01</div>
+              <div class="step-card primary">
+                <h4>Demande de devis</h4>
+                <p>Vous nous décrivez votre projet en quelques informations simples.</p>
+              </div>
+            </div>
+            <div class="process-step motion-card" data-reveal="delay-1">
+              <div class="step-number">02</div>
+              <div class="step-card light">
+                <h4>Visite & Étude</h4>
+                <p>Analyse des contraintes techniques sur site.</p>
+              </div>
+            </div>
+            <div class="process-step motion-card" data-reveal="delay-2">
+              <div class="step-number">03</div>
+              <div class="step-card light">
+                <h4>Réalisation</h4>
+                <p>Travaux réalisés dans le respect des normes.</p>
+              </div>
+            </div>
+            <div class="process-step motion-card" data-reveal="delay-3">
+              <div class="step-number">04</div>
+              <div class="step-card primary">
+                <h4>Livraison</h4>
+                <p>Contrôle qualité et remise des clés sereine.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Témoignages -->
+      <section id="temoignages" class="temoignages landing-section section-padding section-dark">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <span class="eyebrow-text" style="color:var(--brand-accent)">Témoignages Clients</span>
+            <h2 style="color:#fff">Ils nous font confiance.</h2>
+          </div>
+          <div class="testimonials-grid">
+            <div class="testimonial-card motion-card" data-reveal>
+              <div class="quote-icon">❝</div>
+              <p>"Les matériaux achetés chez CK Construction sont d'une qualité irréprochable. Je recommande vivement !"</p>
+              <div class="author">
+                <strong>Jean-Marc D.</strong>
+                <span>Entrepreneur Indépendant</span>
+              </div>
+            </div>
+            <div class="testimonial-card motion-card" data-reveal="delay-1">
+              <div class="quote-icon">❝</div>
+              <p>"Une équipe très professionnelle. La solidité du gros œuvre et la finesse des finitions dépassent mes attentes."</p>
+              <div class="author">
+                <strong>Sophie T.</strong>
+                <span>Propriétaire</span>
+              </div>
+            </div>
+            <div class="testimonial-card motion-card" data-reveal="delay-2">
+              <div class="quote-icon">❝</div>
+              <p>"Je fournis toute mon équipe avec le matériel de CK. C'est un vrai partenaire de confiance pour nous."</p>
+              <div class="author">
+                <strong>Lucas B.</strong>
+                <span>Chef de Chantier</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="contact landing-section section-padding bg-light">
+        <div class="container contact-container" data-reveal>
+          <div class="contact-info">
+            <h2>Prêt à bâtir l'avenir ?</h2>
+            <p>Contactez-nous pour toute demande de devis ou de renseignements. Nous vous répondrons dans les plus brefs délais.</p>
+            <ul class="contact-list">
+              <li>📍 123 Rue de la Construction, Ville, Pays</li>
+              <li>📞 +237 600 00 00 00</li>
+              <li>✉️ contact@ckconstruction.com</li>
+            </ul>
+          </div>
+          <form class="contact-form card-glass motion-card">
+            <input type="text" placeholder="Votre nom" required />
+            <input type="email" placeholder="Votre email" required />
+            <textarea placeholder="Votre message" rows="5" required></textarea>
+            <button type="submit" class="btn-primary">Envoyer le message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    
+    <footer class="footer section-dark">
+      <div class="container text-center">
+        <p>&copy; 2026 CK Construction. Tous droits réservés.</p>
+      </div>
+    </footer>
+
+    <a href="https://wa.me/237600000000" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
