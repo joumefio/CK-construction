@@ -53,33 +53,44 @@
     <header class="navbar" id="navbar">
       <div class="navbar-container">
         <a href="#accueil" class="brand">
-          <svg class="brand-logo" viewBox="0 0 130 85" fill="none" style="overflow: visible;">
+          <svg class="brand-logo" viewBox="0 0 150 95" fill="none" style="overflow: visible;">
             <!-- C (Blue) -->
-            <path d="M 45 15 A 20 20 0 1 0 45 45" stroke="#0E337A" stroke-width="16" fill="none" stroke-linecap="butt" />
-            
-            <!-- Crane inside C -->
-            <path d="M 30 10 L 30 28" stroke="#0E337A" stroke-width="2.5" fill="none" />
-            <circle cx="30" cy="30" r="2.5" fill="#0E337A" />
-            
+            <path d="M 45 15 L 30 15 C 15 15 10 25 10 40 C 10 55 15 65 30 65 L 45 65 L 45 50 L 30 50 C 25 50 22 45 22 40 C 22 35 25 30 30 30 L 45 30 Z" fill="#0E337A" />
+
             <!-- K Stem (Green Skyscraper) -->
-            <path d="M 50 50 L 50 8 L 53 8 L 53 2 L 59 2 L 59 8 L 62 8 L 62 50 Z" fill="#029641" />
-            
-            <!-- Skyscraper Windows -->
-            <rect x="54" y="14" width="4" height="4" fill="#fff" />
-            <rect x="54" y="22" width="4" height="4" fill="#fff" />
-            <rect x="54" y="30" width="4" height="4" fill="#fff" />
-            
+            <path d="M 40 65 L 40 10 L 43 10 L 43 4 L 49 4 L 49 10 L 52 10 L 52 65 Z" fill="#029641" />
+            <rect x="44" y="18" width="4" height="5" fill="#fff" />
+            <rect x="44" y="28" width="4" height="5" fill="#fff" />
+            <rect x="44" y="38" width="4" height="5" fill="#fff" />
+
             <!-- K Arms -->
-            <polygon points="60,35 85,12 98,12 65,42" fill="#029641" />
-            <polygon points="62,35 98,50 85,50 57,42" fill="#029641" />
+            <polygon points="52,45 75,18 90,18 60,50" fill="#029641" />
+            <polygon points="58,45 90,65 75,65 52,52" fill="#029641" />
+
+            <!-- Crane Boom (from K to left) -->
+            <path d="M 40 30 L 20 40" stroke="#0E337A" stroke-width="2.5" fill="none" stroke-linecap="round" />
             
+            <!-- Cable -->
+            <path d="M 22 39 L 22 55" stroke="#0E337A" stroke-width="1.5" fill="none" />
+            
+            <!-- Hook & Load -->
+            <path d="M 21 55 C 21 58 24 58 24 55" stroke="#0E337A" stroke-width="1.5" fill="none" />
+            <rect x="19" y="58" width="6" height="4" fill="#029641" />
+
+            <!-- Silhouette Man -->
+            <circle cx="33" cy="39" r="2.5" fill="#0E337A" /> <!-- Head -->
+            <rect x="32" y="42" width="2" height="7" fill="#0E337A" /> <!-- Body -->
+            <path d="M 32 49 L 30 55" stroke="#0E337A" stroke-width="1.5" fill="none" stroke-linecap="round" /> <!-- Leg 1 -->
+            <path d="M 34 49 L 36 55" stroke="#0E337A" stroke-width="1.5" fill="none" stroke-linecap="round" /> <!-- Leg 2 -->
+            <path d="M 33 44 L 26 43" stroke="#0E337A" stroke-width="1.5" fill="none" stroke-linecap="round" /> <!-- Arm pulling cable -->
+
             <!-- Text: CONSTRUCTION SARL -->
-            <text x="10" y="65" font-family="'Inter', 'Arial', sans-serif" font-weight="900" font-size="11" fill="#0E337A" letter-spacing="0.5">CONSTRUCTION</text>
-            <text x="98" y="65" font-family="'Inter', 'Arial', sans-serif" font-weight="900" font-size="11" fill="#029641">SARL</text>
-            
+            <text x="44" y="77" font-family="'Inter', 'Arial', sans-serif" font-weight="900" font-size="9" fill="#0E337A" letter-spacing="0.5">CONSTRUCTION</text>
+            <text x="122" y="77" font-family="'Inter', 'Arial', sans-serif" font-weight="900" font-size="9" fill="#029641">SARL</text>
+
             <!-- Underlines -->
-            <path d="M 5 72 Q 65 62 125 72" stroke="#0E337A" stroke-width="3" fill="none" stroke-linecap="round" />
-            <path d="M 15 77 Q 65 68 115 77" stroke="#029641" stroke-width="2" fill="none" stroke-linecap="round" />
+            <path d="M 5 83 Q 75 71 145 83" stroke="#029641" stroke-width="3" fill="none" stroke-linecap="round" />
+            <path d="M 15 89 Q 75 81 135 89" stroke="#0E337A" stroke-width="4" fill="none" stroke-linecap="round" />
           </svg>
           <div class="brand-text">
             <strong>CK Construction</strong>
