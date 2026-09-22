@@ -163,4 +163,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // 7. Contact Form WhatsApp Redirect
+  const devisForm = document.getElementById('devis-form');
+  if (devisForm) {
+    devisForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const nom = document.getElementById('devis-nom').value;
+      const tel = document.getElementById('devis-tel').value;
+      const localisation = document.getElementById('devis-localisation').value;
+      const message = document.getElementById('devis-message').value;
+      
+      const whatsappMessage = `*NOUVELLE DEMANDE DE DEVIS*\n\n*Nom :* ${nom}\n*Téléphone :* ${tel}\n*Localisation :* ${localisation}\n\n*Description du projet :*\n${message}`;
+      
+      const whatsappUrl = `https://wa.me/237694235957?text=${encodeURIComponent(whatsappMessage)}`;
+      window.open(whatsappUrl, '_blank');
+    });
+  }
+
 });
+
+// Global function to prefill form when clicking a product
+window.prefillDevis = function(productName) {
+  const contactSection = document.getElementById('contact');
+  const messageInput = document.getElementById('devis-message');
+  
+  if (contactSection && messageInput) {
+    messageInput.value = `Bonjour, je souhaite obtenir un devis ou le prix pour : ${productName}`;
+    contactSection.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      messageInput.focus();
+    }, 800);
+  }
+};

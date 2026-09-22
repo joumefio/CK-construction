@@ -53,9 +53,18 @@
     <header class="navbar" id="navbar">
       <div class="navbar-container">
         <a href="#accueil" class="brand">
-          <svg class="brand-logo" viewBox="0 0 56 56" fill="none" stroke="var(--brand-accent)" stroke-width="2">
-            <path d="M5 50V22l9-6v34M20 50V10l10-7v47M36 50V24l9 6v20M3 50h50"></path>
-            <path d="M24 16h3M24 24h3M24 32h3M9 28h3M9 36h3M40 34h3M40 42h3"></path>
+          <svg class="brand-logo" viewBox="0 0 100 60" fill="none" style="overflow: visible;">
+            <!-- C (Blue) -->
+            <path d="M 40 15 C 20 15, 10 25, 10 35 C 10 45, 20 55, 40 55" stroke="#0E337A" stroke-width="12" stroke-linecap="round"/>
+            <!-- Crane arm inside C -->
+            <path d="M 25 15 L 25 25 L 35 25" stroke="#0E337A" stroke-width="3" fill="none"/>
+            <!-- K (Green) -->
+            <path d="M 50 10 L 50 55" stroke="#029641" stroke-width="12"/>
+            <!-- Building blocks inside K's stem -->
+            <rect x="47" y="15" width="3" height="4" fill="#fff"/>
+            <rect x="47" y="25" width="3" height="4" fill="#fff"/>
+            <rect x="47" y="35" width="3" height="4" fill="#fff"/>
+            <path d="M 80 15 L 50 35 L 80 55" stroke="#029641" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <div class="brand-text">
             <strong>CK Construction</strong>
@@ -65,6 +74,7 @@
         <nav class="nav-links">
           <a href="#accueil" class="active">Accueil</a>
           <a href="#expertises">Expertises</a>
+          <a href="#produits">Boutique</a>
           <a href="#realisations">Réalisations</a>
           <a href="#methode">Méthode</a>
           <a href="#temoignages">Avis</a>
@@ -84,6 +94,7 @@
         <nav class="mobile-menu__nav">
           <a href="#accueil">Accueil</a>
           <a href="#expertises">Expertises</a>
+          <a href="#produits">Boutique</a>
           <a href="#realisations">Réalisations</a>
           <a href="#methode">Méthode</a>
           <a href="#temoignages">Avis</a>
@@ -161,6 +172,69 @@
               <h3>Réhabilitation</h3>
               <div class="card-sep"></div>
               <p>Rénovation et mise à niveau de structures existantes dans le respect des normes.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Produits & Outillage -->
+      <section id="produits" class="produits landing-section section-padding">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <span class="eyebrow-text">Quincaillerie</span>
+            <h2>Vente des matériaux de <span>construction et autres</span></h2>
+            <div class="separator"></div>
+            <p>Construisez vos projets avec nous ! Découvrez notre sélection d'outillages et matériaux de première qualité.</p>
+          </div>
+          
+          <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card motion-card" data-reveal>
+              <div class="product-icon">⛓️</div>
+              <h3>Fer à béton</h3>
+              <button class="btn-product" onclick="prefillDevis('Fer à béton')">Demander un prix</button>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card motion-card" data-reveal="delay-1">
+              <div class="product-icon">🧱</div>
+              <h3>Ciment</h3>
+              <button class="btn-product" onclick="prefillDevis('Ciment')">Demander un prix</button>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card motion-card" data-reveal="delay-2">
+              <div class="product-icon">🏠</div>
+              <h3>Tôles</h3>
+              <button class="btn-product" onclick="prefillDevis('Tôles')">Demander un prix</button>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card motion-card" data-reveal="delay-3">
+              <div class="product-icon">🎨</div>
+              <h3>Peinture</h3>
+              <button class="btn-product" onclick="prefillDevis('Peinture')">Demander un prix</button>
+            </div>
+            <!-- Product 5 -->
+            <div class="product-card motion-card" data-reveal>
+              <div class="product-icon">🛒</div>
+              <h3>Brouettes</h3>
+              <button class="btn-product" onclick="prefillDevis('Brouettes')">Demander un prix</button>
+            </div>
+            <!-- Product 6 -->
+            <div class="product-card motion-card" data-reveal="delay-1">
+              <div class="product-icon">🔒</div>
+              <h3>Serrures</h3>
+              <button class="btn-product" onclick="prefillDevis('Serrures')">Demander un prix</button>
+            </div>
+            <!-- Product 7 -->
+            <div class="product-card motion-card" data-reveal="delay-2">
+              <div class="product-icon">🚰</div>
+              <h3>Robinet</h3>
+              <button class="btn-product" onclick="prefillDevis('Robinet')">Demander un prix</button>
+            </div>
+            <!-- Product 8 -->
+            <div class="product-card motion-card" data-reveal="delay-3">
+              <div class="product-icon">🖼️</div>
+              <h3>Papiers Peints</h3>
+              <button class="btn-product" onclick="prefillDevis('Papiers Peints')">Demander un prix</button>
             </div>
           </div>
         </div>
@@ -293,16 +367,17 @@
             <h2>Prêt à bâtir l'avenir ?</h2>
             <p>Contactez-nous pour toute demande de devis ou de renseignements. Nous vous répondrons dans les plus brefs délais.</p>
             <ul class="contact-list">
-              <li>📍 123 Rue de la Construction, Ville, Pays</li>
-              <li>📞 +237 600 00 00 00</li>
-              <li>✉️ contact@ckconstruction.com</li>
+              <li>📍 BAFOUSSAM-MAIRIE RURAL</li>
+              <li>📞 +237 694 235 957 / +237 679 024 713</li>
+              <li>✉️ Carloskenfacktazoh@gmail.com</li>
             </ul>
           </div>
-          <form class="contact-form card-glass motion-card">
-            <input type="text" placeholder="Votre nom" required />
-            <input type="email" placeholder="Votre email" required />
-            <textarea placeholder="Votre message" rows="5" required></textarea>
-            <button type="submit" class="btn-primary">Envoyer le message</button>
+          <form id="devis-form" class="contact-form card-glass motion-card">
+            <input type="text" id="devis-nom" placeholder="Votre nom" required />
+            <input type="tel" id="devis-tel" placeholder="Votre numéro de téléphone" required />
+            <input type="text" id="devis-localisation" placeholder="Votre localisation (ex: Bafoussam)" required />
+            <textarea id="devis-message" placeholder="Votre message / Description du devis" rows="5" required></textarea>
+            <button type="submit" class="btn-primary">Envoyer la demande sur WhatsApp</button>
           </form>
         </div>
       </section>
@@ -314,7 +389,7 @@
       </div>
     </footer>
 
-    <a href="https://wa.me/237600000000" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+    <a href="https://wa.me/237694235957" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
     </a>
 
