@@ -13,64 +13,108 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('menu-open');
   };
 
-  // Web Speech API helper
-  const speakText = (text) => {
-    if ('speechSynthesis' in window) {
-      // Create utterance
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'fr-FR';
-      utterance.rate = 0.85; // Slightly slower for dramatic effect
-      utterance.pitch = 0.8; // Deeper voice
-      
-      // Try to find a premium/natural French voice if available
-      const voices = window.speechSynthesis.getVoices();
-      const premiumVoice = voices.find(v => v.lang.startsWith('fr') && (v.name.includes('Google') || v.name.includes('Premium')));
-      if (premiumVoice) {
-        utterance.voice = premiumVoice;
-      }
-      
-      window.speechSynthesis.speak(utterance);
-    }
-  };
-
   // Ensure voices are loaded before running (sometimes async in browsers)
   if ('speechSynthesis' in window && speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = () => {};
   }
 
-  const startExperience = () => {
-    // GSAP Timeline
-    const tl = gsap.timeline({
-      onComplete: hideIntro
-    });
+  const startExperience = async () => {
+    // Helper to speak and wait
+    const speakAndWait = (text, onStart) => {
+      return new Promise((resolve) => {
+        if ('speechSynthesis' in window) {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'fr-FR';
+          utterance.rate = 0.9;
+          utterance.pitch = 0.5; // Deeper male voice
+          
+          const voices = window.speechSynthesis.getVoices();
+          // Try to find a male French voice
+          const maleVoice = voices.find(v => v.lang.startsWith('fr') && 
+            (v.name.toLowerCase().includes('paul') || 
+             v.name.toLowerCase().includes('thomas') || 
+             v.name.toLowerCase().includes('male') || 
+             v.name.toLowerCase().includes('david') || 
+             v.name.toLowerCase().includes('rémi') || 
+             v.name.toLowerCase().includes('henri')));
+             
+          if (maleVoice) {
+            utterance.voice = maleVoice;
+          } else {
+             const frVoice = voices.find(v => v.lang.startsWith('fr'));
+             if (frVoice) utterance.voice = frVoice;
+          }
+          
+          utterance.onstart = () => {
+            if (onStart) onStart();
+          };
+          utterance.onend = () => {
+            resolve();
+          };
+          utterance.onerror = () => {
+            resolve();
+          };
+          window.speechSynthesis.speak(utterance);
+        } else {
+          if (onStart) onStart();
+          setTimeout(resolve, text.length * 80);
+        }
+      });
+    };
+
+    window.speechSynthesis.cancel();
 
     // Step 1: C - Créativité
-    tl.call(() => speakText("C… comme Créativité."))
-      .to('.draw-c', { strokeDashoffset: 0, duration: 2, ease: "power2.inOut" })
-      .to('#group-c', { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.7)" }, "-=1.5")
-      .to('#group-c .intro-text-small', { opacity: 1, y: 0, duration: 1 }, "-=0.5")
-      .to({}, { duration: 1.5 }); // Pause
+    await speakAndWait("C", () => {
+      gsap.to('.draw-c', { strokeDashoffset: 0, duration: 1, ease: "power2.inOut" });
+      gsap.to('#group-c', { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" });
+    });
+    await speakAndWait("comme Créativité.", () => {
+      gsap.to('#group-c .intro-text-small', { opacity: 1, y: 0, duration: 0.8 });
+    });
+    
+    await new Promise(r => setTimeout(r, 300));
 
     // Step 2: K - Know-how
-    tl.call(() => speakText("K… comme Know-how. Ce qui signifie… le savoir-faire."))
-      .to('.draw-k', { strokeDashoffset: 0, duration: 2, ease: "power2.inOut" })
-      .to('#group-k', { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.7)" }, "-=1.5")
-      .to('#group-k .intro-text-small', { opacity: 1, y: 0, duration: 1 }, "-=0.5")
-      .to({}, { duration: 3.5 }); // Longer pause for the longer sentence
+    await speakAndWait("K", () => {
+      gsap.to('.draw-k', { strokeDashoffset: 0, duration: 1, ease: "power2.inOut" });
+      gsap.to('#group-k', { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" });
+    });
+    await speakAndWait("comme Know-how,", () => {
+      gsap.to('#group-k .intro-text-small', { opacity: 1, y: 0, duration: 0.8 });
+    });
+    await speakAndWait("qui signifie, signification française : le savoir-faire.", () => {
+    });
+    
+    await new Promise(r => setTimeout(r, 400));
 
     // Step 3: Fusion CK
-    tl.call(() => speakText("C… Créativité. K… Know-how. Ensemble… ils donnent naissance à une nouvelle vision de la construction."))
-      .to('#group-c', { left: '40%', opacity: 0, duration: 1.5, ease: "power3.inOut" }, "fusion")
-      .to('#group-k', { right: '40%', opacity: 0, duration: 1.5, ease: "power3.inOut" }, "fusion")
-      .to('#group-final', { opacity: 1, scale: 1, duration: 1.5, ease: "back.out(1.2)" }, "fusion+=1")
-      .to({}, { duration: 4.5 }); // Pause for sentence
+    await speakAndWait("C, Créativité. K, Know-how.", () => {
+      gsap.to('#group-c', { left: '40%', opacity: 0, duration: 1.5, ease: "power3.inOut" });
+      gsap.to('#group-k', { right: '40%', opacity: 0, duration: 1.5, ease: "power3.inOut" });
+    });
+    await speakAndWait("Ensemble, ils donnent naissance à une nouvelle vision de la construction.", () => {
+      gsap.to('#group-final', { opacity: 1, scale: 1, duration: 1.5, ease: "back.out(1.2)" });
+    });
+
+    await new Promise(r => setTimeout(r, 400));
 
     // Step 4: CONSTRUCTION
-    tl.call(() => speakText("CK Construction. La référence de la construction moderne. Imaginez… nous construisons."))
-      .to('#text-construction', { opacity: 1, duration: 1.5, ease: "power2.inOut" })
-      .to('.intro-signature', { opacity: 1, stagger: 1.5, duration: 1.5 })
-      .to({}, { duration: 4 }) // Final Pause
-      .to(introExperience, { opacity: 0, duration: 1.5 });
+    await speakAndWait("CK Construction.", () => {
+      gsap.to('#text-construction', { opacity: 1, duration: 1.5, ease: "power2.inOut" });
+    });
+    
+    await speakAndWait("La référence de la construction moderne.", () => {
+      gsap.to('#text-signature1', { opacity: 1, duration: 1 });
+    });
+
+    await speakAndWait("Imaginez. Nous construisons.", () => {
+      gsap.to('#text-signature2', { opacity: 1, duration: 1 });
+    });
+
+    await new Promise(r => setTimeout(r, 800));
+    
+    gsap.to(introExperience, { opacity: 0, duration: 1.5, onComplete: hideIntro });
   };
 
   // Start automatically, use setTimeout to ensure everything is rendered
