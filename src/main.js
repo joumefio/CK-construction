@@ -115,8 +115,26 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.to(introExperience, { opacity: 0, duration: 1.5, onComplete: hideIntro });
   };
 
-  // Start automatically, use setTimeout to ensure everything is rendered
-  setTimeout(startExperience, 500);
+  // Start on click to bypass autoplay restrictions
+  const btnStartIntro = document.getElementById('btn-start-intro');
+  const introStartPanel = document.getElementById('intro-start');
+  const introVisuals = document.getElementById('intro-visuals');
+
+  if (btnStartIntro) {
+    btnStartIntro.addEventListener('click', () => {
+      // Wake up speech API synchronously on user gesture
+      const dummy = new SpeechSynthesisUtterance('');
+      dummy.volume = 0;
+      window.speechSynthesis.speak(dummy);
+      
+      gsap.to(introStartPanel, { opacity: 0, duration: 0.5, onComplete: () => introStartPanel.style.display = 'none' });
+      gsap.to(introVisuals, { opacity: 1, duration: 0.5 });
+      
+      startExperience();
+    });
+  } else {
+    setTimeout(startExperience, 500);
+  }
 
   // 2. Before / After Slider
   const slider = document.getElementById('before-after-slider');
