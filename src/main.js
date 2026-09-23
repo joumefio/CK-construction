@@ -143,8 +143,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const handle = slider.querySelector('.slider-handle');
     let isDown = false;
 
+    // Auto-slide animation
+    const autoSlideParams = { percent: 50 };
+    const autoSlideAnim = gsap.fromTo(autoSlideParams, { percent: 30 }, {
+      percent: 70,
+      duration: 3,
+      yoyo: true,
+      repeat: -1,
+      ease: "sine.inOut",
+      onUpdate: () => {
+        if (!isDown) {
+          beforeWrapper.style.width = `${autoSlideParams.percent}%`;
+          handle.style.left = `${autoSlideParams.percent}%`;
+        }
+      }
+    });
+
     const moveSlider = (e) => {
       if (!isDown) return;
+      autoSlideAnim.pause();
       const rect = slider.getBoundingClientRect();
       let x = (e.clientX || e.touches[0].clientX) - rect.left;
       let percent = Math.max(0, Math.min(x / rect.width * 100, 100));
@@ -152,8 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
       handle.style.left = `${percent}%`;
     };
 
-    slider.addEventListener('mousedown', () => isDown = true);
-    slider.addEventListener('touchstart', () => isDown = true, { passive: true });
+    slider.addEventListener('mousedown', () => { isDown = true; autoSlideAnim.pause(); });
+    slider.addEventListener('touchstart', () => { isDown = true; autoSlideAnim.pause(); }, { passive: true });
     
     window.addEventListener('mouseup', () => isDown = false);
     window.addEventListener('touchend', () => isDown = false);
