@@ -45,16 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
              if (frVoice) utterance.voice = frVoice;
           }
           
-          utterance.onstart = () => {
-            if (onStart) onStart();
-          };
-          utterance.onend = () => {
-            resolve();
-          };
-          utterance.onerror = () => {
-            resolve();
-          };
+          utterance.onend = () => resolve();
+          utterance.onerror = () => setTimeout(resolve, text.length * 80);
+          
+          if (onStart) onStart();
           window.speechSynthesis.speak(utterance);
+          
+          // Safety fallback if speech API completely hangs
+          setTimeout(resolve, text.length * 80 + 2000);
         } else {
           if (onStart) onStart();
           setTimeout(resolve, text.length * 80);
