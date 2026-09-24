@@ -2,127 +2,167 @@ import './style.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   
-  // 1. Intro Experience (GSAP Timeline + Web Speech API)
+  // 1. Intro Experience (Cinematic CAK)
   const introExperience = document.getElementById('intro-experience');
   
   // Lock scroll initially
   document.body.classList.add('menu-open');
 
   const hideIntro = () => {
-    introExperience.classList.add('is-hidden');
+    introExperience.classList.add('is-done');
     document.body.classList.remove('menu-open');
+    // Reveal animations for rest of the site
+    setTimeout(() => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); }, 500);
   };
 
-  // Ensure voices are loaded before running (sometimes async in browsers)
+  // Helper for SpeechSynthesis
   if ('speechSynthesis' in window && speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = () => {};
   }
 
-  const startExperience = async () => {
-    // Helper to speak and wait
-    const speakAndWait = (text, onStart) => {
-      return new Promise((resolve) => {
-        if ('speechSynthesis' in window) {
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.lang = 'fr-FR';
-          utterance.rate = 0.9;
-          utterance.pitch = 0.5; // Deeper male voice
-          
-          const voices = window.speechSynthesis.getVoices();
-          // Try to find a male French voice
-          const maleVoice = voices.find(v => v.lang.startsWith('fr') && 
-            (v.name.toLowerCase().includes('paul') || 
-             v.name.toLowerCase().includes('thomas') || 
-             v.name.toLowerCase().includes('male') || 
-             v.name.toLowerCase().includes('david') || 
-             v.name.toLowerCase().includes('rémi') || 
-             v.name.toLowerCase().includes('henri')));
-             
-          if (maleVoice) {
-            utterance.voice = maleVoice;
-          } else {
-             const frVoice = voices.find(v => v.lang.startsWith('fr'));
-             if (frVoice) utterance.voice = frVoice;
-          }
-          
-          utterance.onend = () => resolve();
-          utterance.onerror = () => setTimeout(resolve, text.length * 80);
-          
-          if (onStart) onStart();
-          window.speechSynthesis.speak(utterance);
-          
-          // Safety fallback if speech API completely hangs
-          setTimeout(resolve, text.length * 80 + 2000);
-        } else {
-          if (onStart) onStart();
-          setTimeout(resolve, text.length * 80);
+  const speakAndWait = (text, onStart) => {
+    return new Promise((resolve) => {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'fr-FR';
+        utterance.rate = 0.85;
+        utterance.pitch = 0.8;
+        
+        const voices = window.speechSynthesis.getVoices();
+        const maleVoice = voices.find(v => v.lang.startsWith('fr') && 
+          (v.name.toLowerCase().includes('paul') || 
+           v.name.toLowerCase().includes('thomas') || 
+           v.name.toLowerCase().includes('male') || 
+           v.name.toLowerCase().includes('rémi') || 
+           v.name.toLowerCase().includes('henri')));
+           
+        if (maleVoice) utterance.voice = maleVoice;
+        else {
+           const frVoice = voices.find(v => v.lang.startsWith('fr'));
+           if (frVoice) utterance.voice = frVoice;
         }
-      });
-    };
-
-    window.speechSynthesis.cancel();
-
-    // Step 1: C - Créativité
-    await speakAndWait("C", () => {
-      gsap.to('.draw-c', { strokeDashoffset: 0, duration: 1, ease: "power2.inOut" });
-      gsap.to('#group-c', { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" });
+        
+        utterance.onend = () => resolve();
+        utterance.onerror = () => setTimeout(resolve, text.length * 80);
+        
+        if (onStart) onStart();
+        window.speechSynthesis.speak(utterance);
+        setTimeout(resolve, text.length * 80 + 3000); // fallback
+      } else {
+        if (onStart) onStart();
+        setTimeout(resolve, text.length * 80);
+      }
     });
-    await speakAndWait("comme Créativité.", () => {
-      gsap.to('#group-c .intro-text-small', { opacity: 1, y: 0, duration: 0.8 });
-    });
-    
-    await new Promise(r => setTimeout(r, 300));
-
-    // Step 2: K - Know-how
-    await speakAndWait("K", () => {
-      gsap.to('.draw-k', { strokeDashoffset: 0, duration: 1, ease: "power2.inOut" });
-      gsap.to('#group-k', { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" });
-    });
-    await speakAndWait("comme Know-how,", () => {
-      gsap.to('#group-k .intro-text-small', { opacity: 1, y: 0, duration: 0.8 });
-    });
-    await speakAndWait("qui signifie, signification française : le savoir-faire.", () => {
-    });
-    
-    await new Promise(r => setTimeout(r, 400));
-
-    // Step 3: Fusion CK
-    await speakAndWait("C, Créativité. K, Know-how.", () => {
-      gsap.to('#group-c', { left: '40%', opacity: 0, duration: 1.5, ease: "power3.inOut" });
-      gsap.to('#group-k', { right: '40%', opacity: 0, duration: 1.5, ease: "power3.inOut" });
-    });
-    await speakAndWait("Ensemble, ils donnent naissance à une nouvelle vision de la construction.", () => {
-      gsap.to('#group-final', { opacity: 1, scale: 1, duration: 1.5, ease: "back.out(1.2)" });
-    });
-
-    await new Promise(r => setTimeout(r, 400));
-
-    // Step 4: CONSTRUCTION
-    await speakAndWait("CK Construction.", () => {
-      gsap.to('#text-construction', { opacity: 1, duration: 1.5, ease: "power2.inOut" });
-    });
-    
-    await speakAndWait("La référence de la construction moderne.", () => {
-      gsap.to('#text-signature1', { opacity: 1, duration: 1 });
-    });
-
-    await speakAndWait("Imaginez. Nous construisons.", () => {
-      gsap.to('#text-signature2', { opacity: 1, duration: 1 });
-    });
-
-    await new Promise(r => setTimeout(r, 800));
-    
-    gsap.to(introExperience, { opacity: 0, duration: 1.5, onComplete: hideIntro });
   };
 
-  // Start on click to bypass autoplay restrictions
+  const video = document.getElementById('intro-video');
+  const scrollIndicator = document.getElementById('scroll-indicator');
+  const introVisuals = document.getElementById('intro-visuals');
+  
+  let videoProgress = 0; // 0 to 1
+  let isVideoScrubbingDone = false;
+  let isAnimatingTypo = false;
+
+  const playCAKSequence = async () => {
+    isAnimatingTypo = true;
+    window.speechSynthesis.cancel();
+    
+    // Dim the video slightly more for text legibility
+    gsap.to(video, { filter: "brightness(0.3) contrast(1.1)", duration: 2 });
+    
+    // Voix off script
+    await speakAndWait("Avant chaque réalisation, il y a une idée.");
+    await new Promise(r => setTimeout(r, 600));
+    await speakAndWait("Une vision.");
+    await new Promise(r => setTimeout(r, 800));
+    await speakAndWait("Et derrière chaque vision, un savoir-faire.");
+    await new Promise(r => setTimeout(r, 1000));
+
+    // C
+    await speakAndWait("C... comme Créativité.", () => {
+      gsap.to('#typo-c', { opacity: 1, y: -20, duration: 1.5, ease: "power2.out" });
+    });
+    await new Promise(r => setTimeout(r, 800));
+    gsap.to('#typo-c', { opacity: 0, y: -40, duration: 1 });
+
+    // A
+    await speakAndWait("A... comme Architecture.", () => {
+      gsap.to('#typo-a', { opacity: 1, y: -20, duration: 1.5, ease: "power2.out" });
+    });
+    await new Promise(r => setTimeout(r, 800));
+    gsap.to('#typo-a', { opacity: 0, y: -40, duration: 1 });
+
+    // K
+    await speakAndWait("K... comme Know-how.", () => {
+      gsap.to('#typo-k', { opacity: 1, y: -20, duration: 1.5, ease: "power2.out" });
+    });
+    await new Promise(r => setTimeout(r, 800));
+    gsap.to('#typo-k', { opacity: 0, y: -40, duration: 1 });
+    
+    await speakAndWait("Trois dimensions. Une même vision.");
+    await new Promise(r => setTimeout(r, 500));
+
+    // Fusion CAK
+    await speakAndWait("CAK Construction.", () => {
+      gsap.to('#typo-fusion', { opacity: 1, scale: 1, duration: 2, ease: "back.out(1.2)" });
+    });
+    
+    await new Promise(r => setTimeout(r, 800));
+    
+    await speakAndWait("Imaginez. Nous construisons.");
+    
+    await new Promise(r => setTimeout(r, 1500));
+    
+    hideIntro();
+  };
+
+  const handleScrub = (deltaY) => {
+    if (isVideoScrubbingDone || isAnimatingTypo || !video.duration) return;
+    
+    // Hide indicator on first scroll
+    if (videoProgress === 0 && deltaY > 0) {
+      gsap.to(scrollIndicator, { opacity: 0, duration: 0.5 });
+    }
+
+    videoProgress += deltaY * 0.0003; // Sensitivity
+    videoProgress = Math.max(0, Math.min(1, videoProgress));
+    
+    let targetTime = video.duration * videoProgress;
+    if (isNaN(targetTime)) targetTime = 0;
+    
+    gsap.to(video, { currentTime: targetTime, duration: 0.5, ease: "power2.out" });
+    
+    if (videoProgress >= 0.95 && !isVideoScrubbingDone) {
+       isVideoScrubbingDone = true;
+       video.classList.add('exterior-reached');
+       setTimeout(playCAKSequence, 1500);
+    }
+  };
+
+  window.addEventListener('wheel', (e) => {
+    if (introExperience && !introExperience.classList.contains('is-done')) {
+      handleScrub(e.deltaY);
+    }
+  }, { passive: false });
+
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  
+  window.addEventListener('touchmove', (e) => {
+    if (introExperience && !introExperience.classList.contains('is-done')) {
+      let deltaY = touchStartY - e.touches[0].clientY;
+      touchStartY = e.touches[0].clientY;
+      handleScrub(deltaY * 3);
+    }
+  }, { passive: false });
+
   const btnStartIntro = document.getElementById('btn-start-intro');
   const introStartPanel = document.getElementById('intro-start');
-  const introVisuals = document.getElementById('intro-visuals');
 
   if (btnStartIntro) {
     btnStartIntro.addEventListener('click', () => {
-      // Wake up speech API synchronously on user gesture
       const dummy = new SpeechSynthesisUtterance('');
       dummy.volume = 0;
       window.speechSynthesis.speak(dummy);
@@ -130,10 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
       gsap.to(introStartPanel, { opacity: 0, duration: 0.5, onComplete: () => introStartPanel.style.display = 'none' });
       gsap.to(introVisuals, { opacity: 1, duration: 0.5 });
       
-      startExperience();
+      if (video.readyState === 0) video.load();
     });
-  } else {
-    setTimeout(startExperience, 500);
   }
 
   // 2. Before / After Slider
