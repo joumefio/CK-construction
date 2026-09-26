@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const handleScrub = (deltaY) => {
-    if (isVideoScrubbingDone || isAnimatingTypo || !video.duration) return;
+    if (isVideoScrubbingDone || isAnimatingTypo) return;
     
     // Hide indicator on first scroll
     if (videoProgress === 0 && deltaY > 0) {
@@ -127,10 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
     videoProgress += deltaY * 0.0003; // Sensitivity
     videoProgress = Math.max(0, Math.min(1, videoProgress));
     
-    let targetTime = video.duration * videoProgress;
-    if (isNaN(targetTime)) targetTime = 0;
-    
-    gsap.to(video, { currentTime: targetTime, duration: 0.5, ease: "power2.out" });
+    if (video.duration) {
+      let targetTime = video.duration * videoProgress;
+      if (!isNaN(targetTime)) {
+        gsap.to(video, { currentTime: targetTime, duration: 0.5, ease: "power2.out" });
+      }
+    }
     
     if (videoProgress >= 0.95 && !isVideoScrubbingDone) {
        isVideoScrubbingDone = true;
@@ -163,9 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnStartIntro) {
     btnStartIntro.addEventListener('click', () => {
-      const dummy = new SpeechSynthesisUtterance('');
-      dummy.volume = 0;
-      window.speechSynthesis.speak(dummy);
+      if ('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {
+        const dummy = new SpeechSynthesisUtterance('');
+        dummy.volume = 0;
+        window.speechSynthesis.speak(dummy);
+      }
       
       gsap.to(introStartPanel, { opacity: 0, duration: 0.5, onComplete: () => introStartPanel.style.display = 'none' });
       gsap.to(introVisuals, { opacity: 1, duration: 0.5 });
