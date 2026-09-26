@@ -55,20 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const video = document.getElementById('intro-video');
-  const scrollIndicator = document.getElementById('scroll-indicator');
   const introVisuals = document.getElementById('intro-visuals');
   
-  let videoProgress = 0; // 0 to 1
-  let isVideoScrubbingDone = false;
   let isAnimatingTypo = false;
 
   const playCAKSequence = async () => {
     isAnimatingTypo = true;
     window.speechSynthesis.cancel();
-    
-    // Dim the video slightly more for text legibility
-    gsap.to(video, { filter: "brightness(0.3) contrast(1.1)", duration: 2 });
     
     // Voix off script
     await speakAndWait("Avant chaque réalisation, il y a une idée.");
@@ -116,50 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hideIntro();
   };
 
-  const handleScrub = (deltaY) => {
-    if (isVideoScrubbingDone || isAnimatingTypo) return;
-    
-    // Hide indicator on first scroll
-    if (videoProgress === 0 && deltaY > 0) {
-      gsap.to(scrollIndicator, { opacity: 0, duration: 0.5 });
-    }
-
-    videoProgress += deltaY * 0.0003; // Sensitivity
-    videoProgress = Math.max(0, Math.min(1, videoProgress));
-    
-    if (video.duration) {
-      let targetTime = video.duration * videoProgress;
-      if (!isNaN(targetTime)) {
-        gsap.to(video, { currentTime: targetTime, duration: 0.5, ease: "power2.out" });
-      }
-    }
-    
-    if (videoProgress >= 0.95 && !isVideoScrubbingDone) {
-       isVideoScrubbingDone = true;
-       video.classList.add('exterior-reached');
-       setTimeout(playCAKSequence, 1500);
-    }
-  };
-
-  window.addEventListener('wheel', (e) => {
-    if (introExperience && !introExperience.classList.contains('is-done')) {
-      handleScrub(e.deltaY);
-    }
-  }, { passive: false });
-
-  let touchStartY = 0;
-  window.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-  
-  window.addEventListener('touchmove', (e) => {
-    if (introExperience && !introExperience.classList.contains('is-done')) {
-      let deltaY = touchStartY - e.touches[0].clientY;
-      touchStartY = e.touches[0].clientY;
-      handleScrub(deltaY * 3);
-    }
-  }, { passive: false });
-
   const btnStartIntro = document.getElementById('btn-start-intro');
   const introStartPanel = document.getElementById('intro-start');
 
@@ -174,7 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
       gsap.to(introStartPanel, { opacity: 0, duration: 0.5, onComplete: () => introStartPanel.style.display = 'none' });
       gsap.to(introVisuals, { opacity: 1, duration: 0.5 });
       
-      if (video.readyState === 0) video.load();
+      // Start CAK Sequence immediately
+      setTimeout(playCAKSequence, 800);
     });
   }
 
