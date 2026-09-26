@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: "sine.inOut",
       onUpdate: () => {
         if (!isDown) {
-          beforeWrapper.style.width = `${autoSlideParams.percent}%`;
+          beforeWrapper.style.clipPath = `inset(0 ${100 - autoSlideParams.percent}% 0 0)`;
           handle.style.left = `${autoSlideParams.percent}%`;
         }
       }
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = slider.getBoundingClientRect();
       let x = (e.clientX || e.touches[0].clientX) - rect.left;
       let percent = Math.max(0, Math.min(x / rect.width * 100, 100));
-      beforeWrapper.style.width = `${percent}%`;
+      beforeWrapper.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
       handle.style.left = `${percent}%`;
     };
 
