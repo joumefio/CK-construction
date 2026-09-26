@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.to('#typo-a', { opacity: 0, y: -40, duration: 1 });
 
     // K
-    await speakAndWait("K... comme Know-how.", () => {
+    await speakAndWait("K... le symbole de notre savoir-faire d'exception.", () => {
       gsap.to('#typo-k', { opacity: 1, y: -20, duration: 1.5, ease: "power2.out" });
     });
     await new Promise(r => setTimeout(r, 800));
