@@ -1,4 +1,5 @@
 import './style.css'
+import './location.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -250,6 +251,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 8. Location d'engins Quote Form WhatsApp Redirect
+  const locationForm = document.getElementById('location-quote-form');
+  if (locationForm) {
+    locationForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const nom = document.getElementById('location-nom').value.trim();
+      const tel = document.getElementById('location-tel').value.trim();
+      const email = document.getElementById('location-email').value.trim();
+      const engin = document.getElementById('location-engin-type').value;
+      const travaux = document.getElementById('location-travaux').value;
+      const localisation = document.getElementById('location-localisation').value.trim();
+      const date = document.getElementById('location-date').value;
+      const duree = document.getElementById('location-duree').value;
+      const message = document.getElementById('location-message').value.trim();
+
+      let text = `🚜 *DEMANDE DE LOCATION D'ENGIN LOURD - CAK CONSTRUCTION*\n\n`;
+      text += `👤 *Client :* ${nom}\n`;
+      text += `📞 *Téléphone :* ${tel}\n`;
+      if (email) text += `📧 *E-mail :* ${email}\n`;
+      text += `🚜 *Type d'engin :* ${engin}\n`;
+      text += `🏗️ *Nature des travaux :* ${travaux}\n`;
+      text += `📍 *Chantier :* ${localisation}\n`;
+      if (date) text += `📅 *Date début souhaitée :* ${date}\n`;
+      if (duree) text += `⏱️ *Durée estimée :* ${duree}\n`;
+      if (message) text += `\n💬 *Message complémentaire :*\n${message}\n`;
+
+      const statusEl = document.getElementById('location-form-status');
+      if (statusEl) {
+        statusEl.className = 'location-form-status success';
+        statusEl.textContent = 'Votre demande est prête ! Redirection vers WhatsApp pour transmission immédiate à notre équipe commerciale...';
+      }
+
+      const whatsappUrl = `https://wa.me/237694235957?text=${encodeURIComponent(text)}`;
+      window.open(whatsappUrl, '_blank');
+    });
+  }
+
 });
 
 // Global function to prefill form when clicking a product
@@ -263,5 +302,28 @@ window.prefillDevis = function(productName) {
     setTimeout(() => {
       messageInput.focus();
     }, 800);
+  }
+};
+
+// Global function to prefill location quote form when clicking an equipment card
+window.prefillLocationEngin = function(enginName) {
+  const quoteSection = document.getElementById('devis-location');
+  const enginSelect = document.getElementById('location-engin-type');
+  
+  if (quoteSection) {
+    if (enginSelect) {
+      for (let i = 0; i < enginSelect.options.length; i++) {
+        if (enginSelect.options[i].value.toLowerCase().includes(enginName.toLowerCase()) || 
+            enginSelect.options[i].text.toLowerCase().includes(enginName.toLowerCase())) {
+          enginSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+    quoteSection.scrollIntoView({ behavior: 'smooth' });
+    const nomInput = document.getElementById('location-nom');
+    if (nomInput) {
+      setTimeout(() => nomInput.focus(), 800);
+    }
   }
 };
