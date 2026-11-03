@@ -2,134 +2,8 @@ import './style.css'
 import './location.css'
 
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // 1. Intro Experience (Cinematic CAK)
-  const introExperience = document.getElementById('intro-experience');
-  
-  // Lock scroll initially
-  document.body.classList.add('menu-open');
 
-  const hideIntro = () => {
-    introExperience.classList.add('is-done');
-    document.body.classList.remove('menu-open');
-    // Reveal animations for rest of the site
-    setTimeout(() => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); }, 500);
-  };
-
-  // Helper for SpeechSynthesis
-  if ('speechSynthesis' in window && speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = () => {};
-  }
-
-  const speakAndWait = (text, onStart) => {
-    return new Promise((resolve) => {
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'fr-FR';
-        utterance.rate = 0.85;
-        utterance.pitch = 0.8;
-        
-        const voices = window.speechSynthesis.getVoices();
-        const maleVoice = voices.find(v => v.lang.startsWith('fr') && 
-          (v.name.toLowerCase().includes('paul') || 
-           v.name.toLowerCase().includes('thomas') || 
-           v.name.toLowerCase().includes('male') || 
-           v.name.toLowerCase().includes('rémi') || 
-           v.name.toLowerCase().includes('henri')));
-           
-        if (maleVoice) utterance.voice = maleVoice;
-        else {
-           const frVoice = voices.find(v => v.lang.startsWith('fr'));
-           if (frVoice) utterance.voice = frVoice;
-        }
-        
-        utterance.onend = () => resolve();
-        utterance.onerror = () => setTimeout(resolve, text.length * 80);
-        
-        if (onStart) onStart();
-        window.speechSynthesis.speak(utterance);
-        setTimeout(resolve, text.length * 80 + 3000); // fallback
-      } else {
-        if (onStart) onStart();
-        setTimeout(resolve, text.length * 80);
-      }
-    });
-  };
-
-  const introVisuals = document.getElementById('intro-visuals');
-  
-  let isAnimatingTypo = false;
-
-  const playCAKSequence = async () => {
-    isAnimatingTypo = true;
-    window.speechSynthesis.cancel();
-    
-    // Voix off script
-    await speakAndWait("Avant chaque réalisation, il y a une idée.");
-    await new Promise(r => setTimeout(r, 600));
-    await speakAndWait("Une vision.");
-    await new Promise(r => setTimeout(r, 800));
-    await speakAndWait("Et derrière chaque vision, un savoir-faire.");
-    await new Promise(r => setTimeout(r, 1000));
-
-    // C
-    await speakAndWait("C... comme Créativité.", () => {
-      gsap.to('#typo-c', { opacity: 1, y: -20, duration: 1.5, ease: "power2.out" });
-    });
-    await new Promise(r => setTimeout(r, 800));
-    gsap.to('#typo-c', { opacity: 0, y: -40, duration: 1 });
-
-    // A
-    await speakAndWait("A... comme Architecture.", () => {
-      gsap.to('#typo-a', { opacity: 1, y: -20, duration: 1.5, ease: "power2.out" });
-    });
-    await new Promise(r => setTimeout(r, 800));
-    gsap.to('#typo-a', { opacity: 0, y: -40, duration: 1 });
-
-    // K
-    await speakAndWait("K... comme Know-how, notre savoir-faire d'exception.", () => {
-      gsap.to('#typo-k', { opacity: 1, y: -20, duration: 1.5, ease: "power2.out" });
-    });
-    await new Promise(r => setTimeout(r, 800));
-    gsap.to('#typo-k', { opacity: 0, y: -40, duration: 1 });
-    
-    await speakAndWait("Trois dimensions. Une même vision.");
-    await new Promise(r => setTimeout(r, 500));
-
-    // Fusion CAK
-    await speakAndWait("CAK Construction.", () => {
-      gsap.to('#typo-fusion', { opacity: 1, scale: 1, duration: 2, ease: "back.out(1.2)" });
-    });
-    
-    await new Promise(r => setTimeout(r, 800));
-    
-    await speakAndWait("Imaginez. Nous construisons.");
-    
-    await new Promise(r => setTimeout(r, 1500));
-    
-    hideIntro();
-  };
-
-  const btnStartIntro = document.getElementById('btn-start-intro');
-  const introStartPanel = document.getElementById('intro-start');
-
-  if (btnStartIntro) {
-    btnStartIntro.addEventListener('click', () => {
-      if ('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {
-        const dummy = new SpeechSynthesisUtterance('');
-        dummy.volume = 0;
-        window.speechSynthesis.speak(dummy);
-      }
-      
-      gsap.to(introStartPanel, { opacity: 0, duration: 0.5, onComplete: () => introStartPanel.style.display = 'none' });
-      gsap.to(introVisuals, { opacity: 1, duration: 0.5 });
-      
-      // Start CAK Sequence immediately
-      setTimeout(playCAKSequence, 800);
-    });
-  }
-
-  // 2. Before / After Slider
+  // 1. Before / After Slider
   const slider = document.getElementById('before-after-slider');
   if (slider) {
     const beforeWrapper = slider.querySelector('.before-wrapper');
@@ -172,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('touchmove', moveSlider, { passive: true });
   }
 
-  // 3. Intersection Observer for Scroll Animations
+  // 2. Intersection Observer for Scroll Animations
   const observerOptions = {
     root: null,
     rootMargin: '0px 0px -10% 0px',
@@ -194,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 4. Navbar Shrink on Scroll
+  // 3. Navbar Shrink on Scroll
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -204,26 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 5. Mobile Menu Toggle
+  // 4. Mobile Menu Toggle
   const burgerMenu = document.getElementById('burgerMenu');
   const mobileMenu = document.getElementById('mobileMenu');
-  const mobileLinks = mobileMenu.querySelectorAll('a');
+  const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
 
-  burgerMenu.addEventListener('click', () => {
-    mobileMenu.classList.toggle('is-open');
-    document.body.classList.toggle('menu-open'); // blocks scroll underneath
-  });
-
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('is-open');
-      if (introExperience.classList.contains('is-hidden')) {
-        document.body.classList.remove('menu-open');
-      }
+  if (burgerMenu && mobileMenu) {
+    burgerMenu.addEventListener('click', () => {
+      mobileMenu.classList.toggle('is-open');
+      document.body.classList.toggle('menu-open'); // blocks scroll underneath
     });
-  });
 
-  // 6. Cursor Glow Effect (follows mouse)
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+      });
+    });
+  }
+
+  // 5. Cursor Glow Effect (follows mouse)
   const cursorGlow = document.querySelector('.motion-cursor-glow');
   document.addEventListener('mousemove', (e) => {
     if (cursorGlow) {
@@ -233,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 7. Contact Form WhatsApp Redirect
+  // 6. Contact Form WhatsApp Redirect
   const devisForm = document.getElementById('devis-form');
   if (devisForm) {
     devisForm.addEventListener('submit', (e) => {
@@ -251,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Location d'engins Quote Form WhatsApp Redirect
+  // 7. Location d'engins Quote Form WhatsApp Redirect
   const locationForm = document.getElementById('location-quote-form');
   if (locationForm) {
     locationForm.addEventListener('submit', (e) => {
@@ -286,6 +160,114 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const whatsappUrl = `https://wa.me/237694235957?text=${encodeURIComponent(text)}`;
       window.open(whatsappUrl, '_blank');
+    });
+  }
+
+  // 8. Gallery Category Filter
+  const filterButtons = document.querySelectorAll('.gallery-filters .filter-btn');
+  const galleryItems = document.querySelectorAll('#portfolio-grid .gallery-item');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+
+      galleryItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          item.classList.remove('is-hidden');
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(item, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });
+          }
+        } else {
+          item.classList.add('is-hidden');
+        }
+      });
+    });
+  });
+
+  // 9. Interactive Lightbox Modal (Images & Videos)
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const lightboxMedia = document.getElementById('lightbox-media-container');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxDesc = document.getElementById('lightbox-desc');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxBackdrop = document.querySelector('.lightbox-backdrop');
+
+  const openLightbox = (type, src, title, desc) => {
+    if (!lightboxModal || !lightboxMedia) return;
+    lightboxMedia.innerHTML = '';
+
+    if (type === 'video') {
+      const video = document.createElement('video');
+      video.src = src;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      lightboxMedia.appendChild(video);
+    } else {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = title || 'Réalisation CAK Construction';
+      lightboxMedia.appendChild(img);
+    }
+
+    if (lightboxTitle) lightboxTitle.textContent = title || 'Chantier CAK Construction';
+    if (lightboxDesc) lightboxDesc.textContent = desc || '';
+
+    lightboxModal.classList.add('is-active');
+    lightboxModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('menu-open');
+  };
+
+  const closeLightbox = () => {
+    if (!lightboxModal) return;
+    const activeVideo = lightboxMedia.querySelector('video');
+    if (activeVideo) activeVideo.pause();
+
+    lightboxModal.classList.remove('is-active');
+    lightboxModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('menu-open');
+    setTimeout(() => {
+      if (lightboxMedia) lightboxMedia.innerHTML = '';
+    }, 300);
+  };
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightboxModal && lightboxModal.classList.contains('is-active')) {
+      closeLightbox();
+    }
+  });
+
+  galleryItems.forEach(item => {
+    if (item.classList.contains('before-after-container')) return; // handled by slider
+    item.addEventListener('click', () => {
+      const type = item.getAttribute('data-media-type') || 'image';
+      const src = item.getAttribute('data-media-src');
+      const title = item.getAttribute('data-title');
+      const desc = item.getAttribute('data-desc');
+      if (src) {
+        openLightbox(type, src, title, desc);
+      }
+    });
+  });
+
+  // 10. Engin Video Sound Toggle
+  const soundBtn = document.querySelector('.btn-video-sound');
+  const enginVideo = document.querySelector('.engin-video-player');
+  if (soundBtn && enginVideo) {
+    soundBtn.addEventListener('click', () => {
+      enginVideo.muted = !enginVideo.muted;
+      const isMuted = enginVideo.muted;
+      soundBtn.classList.toggle('is-unmuted', !isMuted);
+      const span = soundBtn.querySelector('span');
+      if (span) {
+        span.textContent = isMuted ? 'Activer le son' : 'Couper le son';
+      }
     });
   }
 
