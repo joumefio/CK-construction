@@ -544,35 +544,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
-@media (max-width: 1200px) {
-  .nav-links { gap: 20px; }
-  .nav-links a { font-size: 11px; }
-}
-
-@media (max-width: 900px) {
-  .form-grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .engins-grid {
-    grid-template-columns: 1fr;
-  }
-  .location-intro-actions {
-    flex-direction: column;
-    width: 100%;
-  }
-  .location-intro-actions .btn-primary,
-  .location-intro-actions .btn-secondary-white {
-    width: 100%;
-  }
-  .btn-submit-location {
-    max-width: 100%;
-  }
-}
-
+/* Badge Real */
 .engin-photo-badge.badge-real {
   background: rgba(2, 150, 65, 0.92);
   color: #fff;
@@ -726,11 +698,358 @@
   color: rgba(255, 255, 255, 0.65);
 }
 
-@media (max-width: 900px) {
+/* ==========================================================================
+   RESPONSIVE DESIGN - MOBILE & TABLET
+   ========================================================================== */
+
+/* Tablette et petits écrans */
+@media (max-width: 1024px) {
+  .engins-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
   .engin-video-showcase {
     grid-template-columns: 1fr;
+    margin-bottom: 40px;
   }
+  
   .engin-video-wrapper {
-    min-height: 260px;
+    min-height: 300px;
+  }
+  
+  .location-services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* Tablette moyenne */
+@media (max-width: 768px) {
+  .location-intro-card {
+    padding: 32px 24px;
+    margin-bottom: 50px;
+  }
+  
+  .location-intro-card h2 {
+    font-size: clamp(24px, 4vw, 32px);
+  }
+  
+  .location-intro-text {
+    font-size: 15px;
+  }
+  
+  .location-services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .engins-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .location-quote-wrapper {
+    padding: 24px 20px;
+  }
+  
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .location-form-actions {
+    align-items: stretch;
+  }
+  
+  .btn-submit-location {
+    max-width: 100%;
+  }
+  
+  .location-intro-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .location-intro-actions .btn-primary,
+  .location-intro-actions .btn-secondary-white {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .engin-video-info {
+    padding: 24px 20px;
+  }
+  
+  .engin-video-info h3 {
+    font-size: 20px;
+  }
+  
+  .engin-video-info p {
+    font-size: 13px;
+  }
+}
+
+/* Mobile - Écrans de téléphone */
+@media (max-width: 480px) {
+  .location-intro-card {
+    padding: 28px 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+  
+  .location-intro-card h2 {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  
+  .location-intro-subtitle {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  
+  .location-intro-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .location-subheading {
+    margin-bottom: 30px;
+  }
+  
+  .location-subheading h3 {
+    font-size: 20px;
+  }
+  
+  .location-subheading p {
+    font-size: 14px;
+  }
+  
+  .engin-card {
+    border-radius: 12px;
+  }
+  
+  .engin-content {
+    padding: 20px 16px;
+  }
+  
+  .engin-card h4 {
+    font-size: 17px;
+  }
+  
+  .engin-uses {
+    font-size: 12.5px;
+  }
+  
+  .engin-photo-slot {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .engin-photo-badge {
+    font-size: 9px;
+    padding: 3px 8px;
+    bottom: 8px;
+    left: 8px;
+  }
+  
+  .btn-engin {
+    padding: 10px 16px;
+    font-size: 11px;
+  }
+  
+  .engin-card-custom {
+    padding: 30px 20px;
+  }
+  
+  .engin-card-custom-icon {
+    font-size: 36px;
+  }
+  
+  .engin-card-custom h4 {
+    font-size: 18px;
+  }
+  
+  .engin-card-custom p {
+    font-size: 13px;
+  }
+  
+  .location-form input,
+  .location-form select,
+  .location-form textarea {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  
+  .location-form textarea {
+    min-height: 90px;
+  }
+  
+  .btn-submit-location {
+    height: 48px;
+    font-size: 12px;
+  }
+  
+  .location-form-notice {
+    font-size: 11px;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .engin-video-wrapper {
+    min-height: 200px;
+  }
+  
+  .engin-video-info {
+    padding: 20px 16px;
+  }
+  
+  .engin-video-info h3 {
+    font-size: 18px;
+  }
+  
+  .engin-video-info p {
+    font-size: 12.5px;
+  }
+  
+  .engin-feature-item {
+    gap: 10px;
+  }
+  
+  .engin-feature-item .feature-icon {
+    font-size: 18px;
+  }
+  
+  .engin-feature-item strong {
+    font-size: 12px;
+  }
+  
+  .engin-feature-item span {
+    font-size: 11px;
+  }
+}
+
+/* Très petits mobiles */
+@media (max-width: 360px) {
+  .location-intro-card h2 {
+    font-size: 22px;
+  }
+  
+  .location-intro-subtitle {
+    font-size: 14px;
+  }
+  
+  .location-intro-text {
+    font-size: 13px;
+  }
+  
+  .location-services-grid {
+    gap: 16px;
+  }
+  
+  .location-service-card {
+    padding: 20px 16px;
+  }
+  
+  .location-service-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 16px;
+  }
+  
+  .location-service-card h4 {
+    font-size: 16px;
+  }
+  
+  .location-service-card p {
+    font-size: 13px;
+  }
+  
+  .engins-grid {
+    gap: 16px;
+  }
+  
+  .engin-card h4 {
+    font-size: 16px;
+  }
+  
+  .engin-uses {
+    font-size: 12px;
+  }
+  
+  .btn-engin {
+    padding: 8px 14px;
+    font-size: 10px;
+  }
+  
+  .location-quote-wrapper {
+    padding: 20px 16px;
+  }
+  
+  .location-quote-header h3 {
+    font-size: 18px;
+  }
+  
+  .location-quote-header p {
+    font-size: 13px;
+  }
+}
+
+/* Améliorations pour la compatibilité des écrans très étroits */
+@media (max-width: 768px) {
+  .location-intro-actions .btn-primary,
+  .location-intro-actions .btn-secondary-white {
+    font-size: 11px;
+    height: 44px;
+  }
+  
+  .location-form input,
+  .location-form select {
+    font-size: 14px;
+  }
+  
+  .location-form label {
+    font-size: 11px;
+  }
+}
+
+/* Correction pour les formulaires sur mobile iOS */
+@supports (-webkit-touch-callout: none) {
+  .location-form input,
+  .location-form select,
+  .location-form textarea {
+    font-size: 16px; /* Empêche le zoom automatique sur iOS */
+  }
+}
+
+/* Amélioration du scroll sur mobile */
+@media (max-width: 768px) {
+  .location-engins {
+    overflow-x: hidden;
+  }
+  
+  .location-intro-card,
+  .location-quote-wrapper {
+    margin-left: clamp(12px, 4vw, 0px);
+    margin-right: clamp(12px, 4vw, 0px);
+    width: auto;
+  }
+}
+
+/* Optimisation des images pour mobile */
+@media (max-width: 768px) {
+  .engin-photo-slot img {
+    image-rendering: optimizeSpeed; /* Optimization for mobile */
+  }
+}
+
+/* Support pour l'orientation paysage mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .engin-video-showcase {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  
+  .engin-video-wrapper {
+    min-height: 200px;
   }
 }
