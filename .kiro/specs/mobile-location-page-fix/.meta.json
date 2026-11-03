@@ -1,0 +1,13 @@
+{
+  "createdAt": "2026-11-03T19:23:00Z",
+  "updatedAt": "2026-11-03T19:23:00Z",
+  "featureName": "mobile-location-page-fix",
+  "specType": "feature",
+  "workflowType": "requirements-first",
+  "status": "in_progress",
+  "documents": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+  }
+}
